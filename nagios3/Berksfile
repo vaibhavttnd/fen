@@ -1,4 +1,4 @@
 # -*- ruby -*-
 source 'https://supermarket.getchef.com'
-
+cookbook 'apache2', '~> 3.2.2'
 metadata
