@@ -18,7 +18,8 @@ supports 'suse'
 supports 'ubuntu'
 
 #depends 'apache2'
+depends 'apache2', '~> 3.2.2'
 depends 'apt'
 depends 'yum-epel'
 
-depends 'apache2', '~> 3.2.2'
+
