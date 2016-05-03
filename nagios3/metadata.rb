@@ -22,8 +22,8 @@ supports 'ubuntu'
 
 #metadata
 
-#depends 'apache2', '~> 3.2.2'
-#depends 'apt'
+depends 'apache2'
+depends 'apt'
 depends 'yum-epel'
 
 
