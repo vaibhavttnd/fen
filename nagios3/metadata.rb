@@ -23,8 +23,8 @@ supports 'ubuntu'
 #metadata
 
 depends 'apache2-3.2.2'
-depends 'apt-3.0.0'
-depends 'yum-3.10.0'
-depends 'yum-epel-0.7.0'
+#depends 'apt-3.0.0'
+#depends 'yum-3.10.0'
+#depends 'yum-epel-0.7.0'
 
 
