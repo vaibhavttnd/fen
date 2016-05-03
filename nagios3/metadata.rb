@@ -18,9 +18,9 @@ supports 'suse'
 supports 'ubuntu'
 
 #depends 'apache2'
-source "https://supermarket.chef.io"
+#source "https://supermarket.chef.io"
 
-metadata
+#metadata
 
 #depends 'apache2', '~> 3.2.2'
 #depends 'apt'
