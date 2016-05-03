@@ -21,4 +21,4 @@ supports 'ubuntu'
 depends 'apt'
 depends 'yum-epel'
 
-depends 'apache2', '~> 3.2.2'
+#depends 'apache2', '~> 3.2.2'
