@@ -17,6 +17,7 @@ supports 'smartos'
 supports 'suse'
 supports 'ubuntu'
 
+source 'https://supermarket.chef.io'
 #depends 'apache2'
 depends 'apache2', '~> 3.2.2'
 depends 'apt'
