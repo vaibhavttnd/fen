@@ -82,12 +82,34 @@ end
 
 execute 'xtrabackup' do
    command 'wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb'
+   notifies :run, 'execute[xtrabackup-dpkg]', :immediately
+   action :nothing
+end
+
+# only one command at a time by execute ?
+
+
+execute 'xtrabackup-dpkg' do
    command 'sudo dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb'
+   notifies :run, 'execute[xtrabackup-update]', :immediately
+   action :nothing
+end
+
+
+
+
+execute 'xtrabackup-update' do
    command 'sudo apt-get update'
+   notifies :run, 'execute[xtrabackup-install]', :immediately
+   action :nothing
+end
+
+
+
+execute 'xtrabackup-install' do
    command 'sudo apt-get install percona-xtrabackup -y'
-#  command 'sudo apt-get install percona-xtrabackup -y'
-  notifies :run, 'execute[base-backup]', :immediately
-  action :nothing
+   notifies :run, 'execute[base-backup]', :immediately
+   action :nothing
 end
 
 
