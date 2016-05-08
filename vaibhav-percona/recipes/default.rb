@@ -69,15 +69,25 @@ execute 'grant-user' do
 end
 
 
+#execute 'xtrabackup' do
+#  command 'sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A'
+#  command "echo 'deb http://repo.percona.com/apt trusty main' > /etc/apt/sources.list.d/percona.list"
+#  command "echo 'deb-src http://repo.percona.com/apt trusty main' >> /etc/apt/sources.list.d/percona.list"
+#  command 'sudo apt-get update'
+#  command 'sudo apt-get install percona-xtrabackup -y'
+#  notifies :run, 'execute[base-backup]', :immediately
+#  action :nothing
+#end
+
+
 execute 'xtrabackup' do
-  command 'sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A'
-  command "echo 'deb http://repo.percona.com/apt trusty main' > /etc/apt/sources.list.d/percona.list"
-  command "echo 'deb-src http://repo.percona.com/apt trusty main' >> /etc/apt/sources.list.d/percona.list"
-  command 'sudo apt-get update'
-  command 'sudo apt-get install percona-xtrabackup -y'
+   command 'wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb'
+   command 'sudo dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb'
+   command 'sudo apt-get update'
+   command 'sudo apt-get install percona-xtrabackup -y'
+#  command 'sudo apt-get install percona-xtrabackup -y'
   notifies :run, 'execute[base-backup]', :immediately
   action :nothing
-
 end
 
 
