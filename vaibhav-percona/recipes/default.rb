@@ -28,16 +28,16 @@ execute 'install_percona' do
   action :nothing
 end
 
-
+#try sending an sql file and then use it to create new database
 execute 'create-user' do
-  command "mysql -u root -pv -e\"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';\""
+  command "echo \"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';\" | mysql -u root -pv"
   notifies :run, 'execute[grant-user]', :immediately
   action :nothing
 end
 
 
 execute 'grant-user' do
-  command "mysql -u root -pv -e'GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;'"
+  command "echo \"GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;\" | mysql -u root -pv"
   notifies :run, 'execute[xtrabackup]', :immediately
   action :nothing
 
