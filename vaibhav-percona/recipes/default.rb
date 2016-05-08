@@ -83,13 +83,13 @@ end
 
 #here rhel and debian specific home directory can be specified
 execute 'base-backup' do
-  command 'sudo innobackupex --no-timestamp --user=newuser  --password=v /home/ubuntu/base-backup'
+  command 'sudo innobackupex --no-timestamp --user=opswork  --password=v /home/ubuntu/base-backup'
   notifies :run, 'execute[incremental]', :immediately
   action :nothing
 end
 
 
 execute 'incremental' do
-  command 'sudo innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=newuser --password=v'
+  command 'sudo innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=opswork --password=v'
   action :nothing
 end
