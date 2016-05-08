@@ -21,21 +21,21 @@ end
 
 
 execute 'install_percona' do
-  command 'apt-get install percona-server-server-5.5'
+  command 'sudo apt-get install percona-server-server-5.5'
   notifies :run, 'execute[create-user]', :immediately
   action :nothing
 end
 
 
 execute 'create-user' do
-  command "/usr/bin/mysql -u root -pv -e'CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';'"
+  command "sudo /usr/bin/mysql -u root -pv -e'CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';'"
   notifies :run, 'execute[grant-user]', :immediately
   action :nothing
 end
 
 
 execute 'grant-user' do
-  command "/usr/bin/mysql -u root -pv -e'GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;'"
+  command "sudo /usr/bin/mysql -u root -pv -e'GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;'"
   notifies :run, 'execute[xtrabackup]', :immediately
   action :nothing
 
@@ -56,13 +56,13 @@ end
 
 #here rhel and debian specific home directory can be specified
 execute 'base-backup' do
-  command 'innobackupex --no-timestamp --user=newuser  --password=v /home/ubuntu/base-backup'
+  command 'sudo innobackupex --no-timestamp --user=newuser  --password=v /home/ubuntu/base-backup'
   notifies :run, 'execute[incremental]', :immediately
   action :nothing
 end
 
 
 execute 'incremental' do
-  command 'innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=newuser --password=v'
+  command 'sudo innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=newuser --password=v'
   action :nothing
 end
