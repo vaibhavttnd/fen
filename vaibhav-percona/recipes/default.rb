@@ -7,7 +7,7 @@ end
 
 
 execute 'install' do
-  command 'dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb'
+  command 'sudo dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb'
   notifies :run, 'execute[apt-update]', :immediately
   action :nothing
 end
