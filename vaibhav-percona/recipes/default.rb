@@ -1,7 +1,6 @@
 
 execute 'percona_install' do
   command 'wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb'
-  command 'dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb'
   notifies :run, 'execute[install]', :immediately
 end
 
