@@ -30,7 +30,7 @@ end
 
 
 execute 'create-user' do
-  command "sudo /usr/bin/mysql -u root -pv -e'CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';'"
+  command "sudo /usr/bin/mysql -u root -pv -e\"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';\""
   notifies :run, 'execute[grant-user]', :immediately
   action :nothing
 end
