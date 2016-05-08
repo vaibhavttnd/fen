@@ -20,8 +20,8 @@ execute 'apt-update' do
 end
 
 execute 'install_percona' do
-  command "'echo percona-server-server-5.5 percona-server-server/root_password password v' | sudo debconf-set-selections"
-  command "'echo percona-server-server-5.5 percona-server-server/root_password_again password v' | sudo debconf-set-selections"
+  command "echo 'percona-server-server-5.5 percona-server-server/root_password password v' | sudo debconf-set-selections"
+  command "echo 'percona-server-server-5.5 percona-server-server/root_password_again password v' | sudo debconf-set-selections"
   command 'sudo apt-get install percona-server-server-5.5 -y'  
   command 'sudo apt-get -f install'
   notifies :run, 'execute[create-user]', :immediately
