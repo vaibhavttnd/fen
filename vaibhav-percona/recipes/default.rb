@@ -17,12 +17,12 @@ end
 
 
 execute 'create-user' do
-  command '/usr/bin/mysql -u root -pv -e"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';"'
+  command "/usr/bin/mysql -u root -pv -e'CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';'"
 end
 
 
 execute 'grant-user' do
-  command '/usr/bin/mysql -u root -pv -e"GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;"'
+  command "/usr/bin/mysql -u root -pv -e'GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;'"
 end
 
 
