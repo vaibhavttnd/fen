@@ -21,7 +21,8 @@ end
 
 
 execute 'install_percona' do
-  command 'sudo apt-get install percona-server-server-5.5'
+  command 'sudo apt-get install percona-server-server-5.5 -y'
+  command 'sudo apt-get -f install'
   notifies :run, 'execute[create-user]', :immediately
   action :nothing
 end
