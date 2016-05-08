@@ -28,8 +28,8 @@ end
 
 execute 'xtrabackup' do
   command 'sudo apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A'
-  command "sudo sh -c "echo 'deb http://repo.percona.com/apt trusty main' > /etc/apt/sources.list.d/percona.list""
-  command "sudo sh -c "echo 'deb-src http://repo.percona.com/apt trusty main' >> /etc/apt/sources.list.d/percona.list""
+  command "echo 'deb http://repo.percona.com/apt trusty main' > /etc/apt/sources.list.d/percona.list"
+  command "echo 'deb-src http://repo.percona.com/apt trusty main' >> /etc/apt/sources.list.d/percona.list"
   command 'sudo apt-get update'
   command 'sudo apt-get install percona-xtrabackup'
 end
