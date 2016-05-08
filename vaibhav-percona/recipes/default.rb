@@ -28,8 +28,10 @@ execute 'install_percona' do
   action :nothing
 end
 
+# passing commands as -e"<comand>" on mysql, was not working on server.
 #try sending an sql file and then use it to create new database
 execute 'create-user' do
+  command "service mysql start"
   command "echo \"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';\" | mysql -u root -pv"
   notifies :run, 'execute[grant-user]', :immediately
   action :nothing
