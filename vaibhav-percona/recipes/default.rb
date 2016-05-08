@@ -24,28 +24,31 @@ execute 'install_percona' do
   command "echo 'percona-server-server-5.5 percona-server-server/root_password_again password v' | sudo debconf-set-selections"
   command 'sudo apt-get install percona-server-server-5.5 -y'  
   command 'sudo apt-get -f install'
-#  notifies :run, 'execute[/home/ubuntu/user.sql]', :immediately
-#  action :nothing
+  notifies :run, 'execute[user]', :immediately
+  action :nothing
 end
 
+user='/home/ubuntu/user.sql'
 
-file '/home/ubuntu/user.sql' do
+#file '/home/ubuntu/user.sql' do
+file user do  
   content 'CREATE USER \'newuser\'@\'localhost\' IDENTIFIED BY \'v\';'
   mode '0755'
   owner 'root'
   group 'root'
-#  notifies :run, 'execute[/home/ubuntu/permission.sql]', :immediately
-#  action :nothing
+  notifies :run, 'execute[permission]', :immediately
+  action :nothing
 end
 
-
-file '/home/ubuntu/permission.sql' do
+permission='/home/ubuntu/permission.sql'
+#file '/home/ubuntu/permission.sql' do
+file permission do 
   content 'GRANT ALL PRIVILEGES ON * . * TO \'newuser\'@\'localhost\';FLUSH PRIVILEGES;'
   mode '0755'
   owner 'root'
   group 'root'
-#  notifies :run, 'execute[create-user]', :immediately
-#  action :nothing
+  notifies :run, 'execute[create-user]', :immediately
+  action :nothing
 end
 
 
