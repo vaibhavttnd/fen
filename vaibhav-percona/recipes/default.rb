@@ -74,7 +74,7 @@ execute 'xtrabackup' do
   command "echo 'deb http://repo.percona.com/apt trusty main' > /etc/apt/sources.list.d/percona.list"
   command "echo 'deb-src http://repo.percona.com/apt trusty main' >> /etc/apt/sources.list.d/percona.list"
   command 'sudo apt-get update'
-  command 'sudo apt-get install percona-xtrabackup'
+  command 'sudo apt-get install percona-xtrabackup -y'
   notifies :run, 'execute[base-backup]', :immediately
   action :nothing
 
