@@ -31,7 +31,7 @@ end
 #user='/home/ubuntu/user.sql'
 
 file '/home/ubuntu/user.sql' do
-  content 'CREATE USER \'newuser\'@\'localhost\' IDENTIFIED BY \'v\';'
+  content 'CREATE USER \'opswork\'@\'localhost\' IDENTIFIED BY \'v\';'
   mode '0755'
   owner 'root'
   group 'root'
@@ -42,7 +42,7 @@ end
 
 #permission='/home/ubuntu/permission.sql'
 file '/home/ubuntu/permission.sql' do
-  content 'GRANT ALL PRIVILEGES ON * . * TO \'newuser\'@\'localhost\';FLUSH PRIVILEGES;'
+  content 'GRANT ALL PRIVILEGES ON * . * TO \'opswork\'@\'localhost\';FLUSH PRIVILEGES;'
   mode '0755'
   owner 'root'
   group 'root'
