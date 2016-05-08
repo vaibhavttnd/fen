@@ -24,25 +24,45 @@ execute 'install_percona' do
   command "echo 'percona-server-server-5.5 percona-server-server/root_password_again password v' | sudo debconf-set-selections"
   command 'sudo apt-get install percona-server-server-5.5 -y'  
   command 'sudo apt-get -f install'
+  notifies :run, 'execute[/home/ubuntu/user.sql]', :immediately
+  action :nothing
+end
+
+
+file '/home/ubuntu/user.sql' do
+  content 'CREATE USER \'newuser\'@\'localhost\' IDENTIFIED BY \'v\';'
+  mode '0755'
+  owner 'root'
+  group 'root'
+  notifies :run, 'execute[/home/ubuntu/permission.sql]', :immediately
+  action :nothing
+end
+
+
+file '/home/ubuntu/permission.sql' do
+  content 'GRANT ALL PRIVILEGES ON * . * TO \'newuser\'@\'localhost\';FLUSH PRIVILEGES;'
+  mode '0755'
+  owner 'root'
+  group 'root'
   notifies :run, 'execute[create-user]', :immediately
   action :nothing
 end
 
+
+
 # passing commands as -e"<comand>" on mysql, was not working on server.
-#try sending an sql file and then use it to create new database
+
 execute 'create-user' do
-  command "service mysql start"
-  command "echo \"CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'v';\" | mysql -u root -pv"
+  command "mysql -u root -pv < /home/ubuntu/user.sql"
   notifies :run, 'execute[grant-user]', :immediately
   action :nothing
 end
 
 
 execute 'grant-user' do
-  command "echo \"GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';FLUSH PRIVILEGES;\" | mysql -u root -pv"
+  command "mysql -u root -pv < /home/ubuntu/permission.sql"
   notifies :run, 'execute[xtrabackup]', :immediately
   action :nothing
-
 end
 
 
