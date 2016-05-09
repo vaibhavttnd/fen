@@ -28,7 +28,7 @@ end
 #user='/home/ubuntu/user.sql'
 
 file '/home/ubuntu/user.sql' do
-  content 'CREATE USER \'opswork\'@\'localhost\' IDENTIFIED BY \'v\';'
+  content 'CREATE USER \'vaibhav\'@\'localhost\' IDENTIFIED BY \'v\';'
   mode '0755'
   owner 'root'
   group 'root'
@@ -37,7 +37,7 @@ end
 
 #permission='/home/ubuntu/permission.sql'
 file '/home/ubuntu/permission.sql' do
-  content 'GRANT ALL PRIVILEGES ON * . * TO \'opswork\'@\'localhost\';FLUSH PRIVILEGES;'
+  content 'GRANT ALL PRIVILEGES ON * . * TO \'vaibhav\'@\'localhost\';FLUSH PRIVILEGES;'
   mode '0755'
   owner 'root'
   group 'root'
@@ -111,13 +111,13 @@ end
 
 #here rhel and debian specific home directory can be specified
 execute 'base-backup' do
-  command 'sudo innobackupex --no-timestamp --user=opswork  --password=v /home/ubuntu/base-backup'
+  command 'sudo innobackupex --no-timestamp --user=vaibhav  --password=v /home/ubuntu/base-backup'
   notifies :run, 'execute[db-create]', :immediately
   action :nothing
 end
 
 
 execute 'incremental' do
-  command 'sudo innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=opswork --password=v'
+  command 'sudo innobackupex --incremental /home/ubuntu/incremental --incremental-basedir=/home/ubuntu/base-backup --user=vaibhav --password=v'
   action :nothing
 end
