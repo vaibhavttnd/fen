@@ -26,7 +26,7 @@ end
 execute 'scp-backup' do
   command 'scp -r -i vaibhav.pem /home/ubuntu/base/ ubuntu@:52.207.246.181/home/ubuntu/base'
   #add ip
-  notifies :run, 'execute[mysql]', :immediately
+#  notifies :run, 'execute[mysql]', :immediately
   action :nothing
 end
 
