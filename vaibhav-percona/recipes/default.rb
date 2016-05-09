@@ -56,14 +56,14 @@ end
 # passing commands as -e"<comand>" on mysql, was not working on server.
 
 execute 'create-user' do
-  command "mysql -u root -pv < /home/ubuntu/user.sql"
+  command "sudo mysql -u root -pv < /home/ubuntu/user.sql"
 #  notifies :run, 'execute[grant-user]', :immediately
   action :nothing
 end
 
 
 execute 'grant-user' do
-  command "mysql -u root -pv < /home/ubuntu/permission.sql"
+  command "sudo mysql -u root -pv < /home/ubuntu/permission.sql"
   notifies :run, 'execute[xtrabackup]', :immediately
   action :nothing
 end
