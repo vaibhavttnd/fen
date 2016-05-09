@@ -112,7 +112,7 @@ end
 #here rhel and debian specific home directory can be specified
 execute 'base-backup' do
   command 'sudo innobackupex --no-timestamp --user=opswork  --password=v /home/ubuntu/base-backup'
-#  notifies :run, 'execute[incremental]', :immediately
+  notifies :run, 'execute[db-create]', :immediately
   action :nothing
 end
 
