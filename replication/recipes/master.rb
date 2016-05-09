@@ -3,7 +3,7 @@
 execute 'innobackup' do
   command 'innobackupex --user=root --password=v /home/ubuntu/base/'
   notifies :run, 'execute[scp-backup]', :immediately
-  action :nothing
+#  action :nothing
 end
 
 #mysql start
@@ -21,10 +21,11 @@ end
 #  action :nothing
 #end
 
-#pem file should be present
+
+#Note : pem file should be present
 
 execute 'scp-backup' do
-  command 'scp -r -i vaibhav.pem /home/ubuntu/base/ ubuntu@:52.207.246.181/home/ubuntu/base'
+  command 'scp -r -i vaibhav.pem /home/ubuntu/base/ ubuntu@52.207.246.181:/home/ubuntu/base'
   #add ip
 #  notifies :run, 'execute[mysql]', :immediately
   action :nothing
@@ -32,7 +33,7 @@ end
 
 #here template can be used
 execute 'scp-cnf' do
-  command 'scp -r -i vaibhav.pem /etc/mysql/my.cnf ubuntu@:52.207.246.181/etc/mysql/my.cnf'
+  command 'scp -r -i vaibhav.pem /etc/mysql/my.cnf ubuntu@52.207.246.181:/etc/mysql/my.cnf'
   #add ip
 #  notifies :run, 'execute[install]', :immediately
   action :nothing
