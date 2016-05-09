@@ -35,7 +35,7 @@ execute 'mysql-start' do
 end
 
 
-template can be used
+#template can be used
 #Note MASTER_LOG_FILE, MASTER_LOG_POSTION before replication
 file '/home/ubuntu/bin-log.sql' do
   content "CHANGE MASTER TO MASTER_HOST='52.207.252.240',MASTER_USER='repl',MASTER_PASSWORD='v',MASTER_LOG_FILE='mysql-bin.000001',MASTER_LOG_POS=196;START SLAVE;"
