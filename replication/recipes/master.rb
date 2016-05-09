@@ -51,7 +51,7 @@ end
 
 
 file '/home/ubuntu/permission.sql' do
-  content 'GRANT REPLICATION SLAVE ON *.*  TO 'repl'@'52.207.246.181'IDENTIFIED BY 'v';'
+  content "GRANT REPLICATION SLAVE ON *.*  TO 'repl'@'52.207.246.181'IDENTIFIED BY 'v';"
 #add ip
   mode '0755'
   owner 'root'
