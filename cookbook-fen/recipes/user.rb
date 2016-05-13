@@ -7,15 +7,15 @@ user 'monitoring' do
   shell '/bin/bash'
   supports :manage_home => true
   action :create
-  notifies :run, 'execute[switch-user]', :immediately
+#  notifies :run, 'execute[switch-user]', :immediately
 end
 
-#notify this after user
-execute 'switch-user' do
-  command 'su - monitoring'
-  action :nothing
-  notifies :run, 'directory[/home/monitoring/.ssh]', :immediately 
-end
+#notify this after user creation
+#execute 'switch-user' do
+#  command 'su - monitoring'
+#  action :nothing
+#  notifies :run, 'directory[/home/monitoring/.ssh]', :immediately 
+#end
 
 
 #################### User created
@@ -33,7 +33,7 @@ directory "/home/monitoring/.ssh" do
   owner 'monitoring'
   group 'monitoring'
 #  group node['web_app']['group_name']
-  action :nothing
+  action :create
 #  notifies :run, 'execute[switch-user]', :immediately 
 end
 
