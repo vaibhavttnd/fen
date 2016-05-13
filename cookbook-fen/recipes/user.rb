@@ -1,8 +1,8 @@
 
 user 'monitoring' do
   comment 'Monitoring User'
-#  uid '1234'
-#  gid '1234'
+  uid '1234'
+  gid '1234'
   home '/home/monitoring'
   shell '/bin/bash'
 end
