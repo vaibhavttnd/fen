@@ -43,8 +43,8 @@ cookbook_file "#{node['web_app']['user_dir']}/.ssh/id_rsa2" do
   source 'id_rsa2'      ######## delete private.txt
 #  cookbook 'fen-apache2'   ######## change it after testing
   mode 0600
-  owner 'monitoring' #"#{node['web_app']['user_name']}"
-  group 'monitoring' #"#{node['web_app']['group_name']}"
+  owner "#{node['web_app']['user_name']}"
+  group "#{node['web_app']['group_name']}"
   action :create
 #  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
 end
