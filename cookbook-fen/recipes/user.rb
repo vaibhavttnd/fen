@@ -2,7 +2,7 @@
 user 'monitoring2' do
   comment 'Monitoring User'
   uid '1234'
-  gid '1234'
+#  gid '1234'
   home '/home/monitoring2'
   shell '/bin/bash'
   supports :manage_home => true
