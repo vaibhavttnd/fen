@@ -7,28 +7,34 @@ user 'monitoring' do
   shell '/bin/bash'
   supports :manage_home => true
   action :create
+  notifies :run, 'execute[switch-user]', :immediately
 end
 
+#notify this after user
 execute 'switch-user' do
   command 'su - monitoring'
+  action :nothing
+  notifies :run, 'directory[/home/monitoring/.ssh]', :immediately 
 end
 
 
 #################### User created
+#notify this
 
 #node['web_app']['user_name'] = 'monitoring'
 #node['web_app']['group_name'] = 'monitoring'
 #node['web_app']['user_dir'] = '/home/monitoring'
 
 #directory "#{node['web_app']['user_dir']}/.ssh" do
+
 directory "/home/monitoring/.ssh" do
   mode 0775
 #  user node['web_app']['user_name']
-  user 'monitoring'
+  owner 'monitoring'
+  group 'monitoring'
 #  group node['web_app']['group_name']
   action :nothing
-#  not_if { ::File.directory?("#{node['web_app']['user_dir']}/.ssh")}
-  subscribes :action, 'user[monitoring]', :immediately    #check this 
+#  notifies :run, 'execute[switch-user]', :immediately 
 end
 
 ####################  Directory created
