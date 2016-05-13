@@ -21,9 +21,9 @@ end
 #################### User created
 #notify this
 
-#node['web_app']['user_name'] = 'monitoring'
-#node['web_app']['group_name'] = 'monitoring'
-#node['web_app']['user_dir'] = '/home/monitoring'
+node['web_app']['user_name'] = 'monitoring'
+node['web_app']['group_name'] = 'monitoring'
+node['web_app']['user_dir'] = '/home/monitoring'
 
 #directory "#{node['web_app']['user_dir']}/.ssh" do
 
@@ -39,22 +39,21 @@ end
 
 ####################  Directory created
 
-#cookbook_file "#{node['web_app']['user_dir']}/.ssh/id_rsa" do
-#cookbook_file "/home/monitoring/.ssh/id_rsa" do
-#  source 'private.txt'      ######## delete private.txt
+cookbook_file "#{node['web_app']['user_dir']}/.ssh/id_rsa2" do
+  source 'id_rsa2'      ######## delete private.txt
 #  cookbook 'fen-apache2'   ######## change it after testing
-#  mode 0600
-#  owner 'monitoring' #"#{node['web_app']['user_name']}"
-#  group 'monitoring' #"#{node['web_app']['group_name']}"
-#  action :create
-#  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
-#end
-
-cookbook_file '/home/monitoring/.ssh/id_rsa' do
-  source 'id_rsa'
-  owner 'monitoring'
-  group 'monitoring'
-  mode '0755'
+  mode 0600
+  owner 'monitoring' #"#{node['web_app']['user_name']}"
+  group 'monitoring' #"#{node['web_app']['group_name']}"
   action :create
+#  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
 end
+
+#cookbook_file '/home/monitoring/.ssh/id_rsa' do
+#  source 'id_rsa'
+#  owner 'monitoring'
+#  group 'monitoring'
+#  mode '0755'
+#  action :create
+#end
 ####################  Private Key passed
