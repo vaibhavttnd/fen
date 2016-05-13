@@ -16,17 +16,18 @@ end
 
 #################### User created
 
-node['web_app']['user_name'] = "monitoring"
-node['web_app']['group_name'] = "monitoring"
-node['web_app']['user_dir'] = "/home/monitoring"
+#node['web_app']['user_name'] = 'monitoring'
+#node['web_app']['group_name'] = 'monitoring'
+#node['web_app']['user_dir'] = '/home/monitoring'
 
 #directory "#{node['web_app']['user_dir']}/.ssh" do
 directory "/home/monitoring/.ssh" do
   mode 0775
-  user node['web_app']['user_name']
+#  user node['web_app']['user_name']
+  user 'monitoring'
 #  group node['web_app']['group_name']
   action :create
-  not_if { ::File.directory?("#{node['web_app']['user_dir']}/.ssh")}
+#  not_if { ::File.directory?("#{node['web_app']['user_dir']}/.ssh")}
   subscribes :action, 'user[monitoring]', :immediately    #check this 
 end
 
