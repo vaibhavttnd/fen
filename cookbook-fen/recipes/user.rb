@@ -9,6 +9,11 @@ user 'monitoring' do
   action :create
 end
 
+execute 'switch-user' do
+  command 'su - monitoring'
+end
+
+
 #################### User created
 
 node['web_app']['user_name'] = "monitoring"
