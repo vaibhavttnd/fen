@@ -51,7 +51,7 @@ end
 #end
 
 cookbook_file '/home/monitoring/.ssh/id_rsa' do
-  source 'private.txt'
+  source 'id_rsa'
   owner 'monitoring'
   group 'monitoring'
   mode '0755'
