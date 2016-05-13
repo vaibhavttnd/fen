@@ -26,7 +26,7 @@ directory "/home/monitoring/.ssh" do
 #  user node['web_app']['user_name']
   user 'monitoring'
 #  group node['web_app']['group_name']
-  action :create
+  action :nothing
 #  not_if { ::File.directory?("#{node['web_app']['user_dir']}/.ssh")}
   subscribes :action, 'user[monitoring]', :immediately    #check this 
 end
