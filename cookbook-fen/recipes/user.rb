@@ -23,7 +23,7 @@ end
 
 #node['web_app']['user_name'] = 'monitoring'
 #node['web_app']['group_name'] = 'monitoring'
-#node['web_app']['user_dir'] = '/home/monitoring'
+node['web_app']['user_dir'] = '/home/monitoring'
 
 #directory "#{node['web_app']['user_dir']}/.ssh" do
 
@@ -39,15 +39,15 @@ end
 
 ####################  Directory created
 
-#cookbook_file "#{node['web_app']['user_dir']}/.ssh/id_rsa" do
-#  source 'private.txt'      ######## delete private.txt
+cookbook_file "#{node['web_app']['user_dir']}/.ssh/id_rsa" do
+  source 'private.txt'      ######## delete private.txt
 #  cookbook 'fen-apache2'   ######## change it after testing
-#  mode 0600
-#  user node['web_app']['user_name']
-#  group node['web_app']['group_name']
-##  action :create
+  mode 0600
+  owner "#{node['web_app']['user_name']}"
+  group "#{node['web_app']['group_name']}"
+  action :create
 #  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
-#end
+end
 
 
 ####################  Private Key passed
