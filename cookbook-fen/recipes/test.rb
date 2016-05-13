@@ -15,7 +15,7 @@ env = { AWS_DEFAULT_REGION: 'us-east-1' }
 exepath = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 cron 'ami_and_snapshot_ami_backup' do
-  comment 'ami and snapshot backup every 15 days'
+#  comment 'ami and snapshot backup every 15 days'
   environment env
   path exepath
   day '*/15'
