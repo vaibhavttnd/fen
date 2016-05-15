@@ -20,39 +20,39 @@ end
 #################### User created
 #notify this
 
-node[:web_app][:user_name]='monitoring'
-node['web_app']['group_name']='monitoring'
-node['web_app']['user_dir']='/home/monitoring'
+node.default['web_app']['user_name'] = "monitoring"
+node.default['web_app']['group_name'] = "monitoring"
+node.default['web_app']['user_dir'] = "/home/monitoring"
 
-#directory "#{node['web_app']['user_dir']}/.ssh" do
-
-directory "/home/monitoring/.ssh" do
+directory "#{node['web_app']['user_dir']}/.ssh" do
   mode 0775
-#  user node['web_app']['user_name']
-  owner 'monitoring'
-  group 'monitoring'
-#  group node['web_app']['group_name']
+  user node['web_app']['user_name']
+#  owner 'monitoring'
+#  group 'monitoring'
+  group node['web_app']['group_name']
   action :create
 #  notifies :run, 'execute[switch-user]', :immediately 
 end
 
 ####################  Directory created
 
-#cookbook_file "#{node[:web_app][:user_dir]}/.ssh/id_rsa2" do
-#  source 'id_rsa2'      ######## delete private.txt
-#  cookbook 'fen-apache2'   ######## change it after testing
-#  mode 0600
-#  owner 'monitoring' #node['web_app']['user_name']
-#  group 'monitoring' #node['web_app']['group_name']
-#  action :create
-#  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
-#end
 
-cookbook_file '/home/monitoring/.ssh/id_rsa2' do
-  source 'id_rsa2'
-  owner 'monitoring'
-  group 'monitoring'
-  mode '0755'
+########### publick key or private key ??
+cookbook_file "#{node[:web_app][:user_dir]}/.ssh/id_rsa.pub" do
+  source 'id_rsa.pub'      ######## delete private.txt
+#  cookbook 'fen-apache2'   ######## change it after testing
+  mode 0600
+  owner node['web_app']['user_name']
+  group node['web_app']['group_name']
   action :create
+  subscribes :action, "directory[#{node['web_app']['user_dir']}/.ssh]", :immediately    #check this
 end
+
+#cookbook_file '/home/monitoring/.ssh/id_rsa2' do
+#  source 'id_rsa2'
+#  owner 'monitoring'
+#  group 'monitoring'
+#  mode '0755'
+#  action :create
+#end
 ####################  Private Key passed

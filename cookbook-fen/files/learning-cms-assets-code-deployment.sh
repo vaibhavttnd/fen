@@ -9,6 +9,7 @@
 aws=/usr/local/bin/aws
 code_path=/home/monitor/learning-cms-assets/
 cd $code_path
+git_origin=`git remote add origin ssh://git@vc.fen.com/learning-cms-assets`
 git_pull=`git pull origin master`
 if [ $? -eq 0 ];then
         ls
